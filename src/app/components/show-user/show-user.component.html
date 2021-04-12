@@ -1,0 +1,6 @@
+<div class="profile" *ngIf="users$|async as users">
+  <img [src]="users.avatar" alt="" class="profile-image">
+  <div class="name">{{users.first_name}}     {{users.last_name}} </div>
+  <div class="profile-title"> Works hard as software engineer </div>
+  <a href="#">{{users.email}}</a>
+</div>

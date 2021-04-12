@@ -1,0 +1,40 @@
+<div class="container">
+  <table *ngFor="let user of users$ | async" class="row">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="avatar">
+      <th mat-header-cell *matHeaderCellDef> Avatar </th>
+      <td mat-cell > <img [src]="user.avatar" alt="" class="avatar"> </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="first-name">
+      <th mat-header-cell *matHeaderCellDef>First Name </th>
+      <td mat-cell > {{user.first_name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="last-name">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell > {{user.last_name}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell > {{user.email}} </td>
+    </ng-container>
+
+    <!-- Show button -->
+    <ng-container matColumnD  ef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Show </th>
+      <button  [routerLink]="['show/'+user.id]">Show User Detail </button>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
