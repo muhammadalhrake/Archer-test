@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { switchMap, map, filter, tap } from 'rxjs/operators';
-import { combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-show-user',
@@ -17,6 +18,15 @@ export class ShowUserComponent implements OnInit {
     "last_name": "string",
     "email": "string"
   }
+  userInStream = new BehaviorSubject(false);
+  email = new FormControl({ value: "", disabled: false }, [
+    Validators.required,
+    Validators.email
+  ]);
+  password = new FormControl({ value: "", disabled: false }, [
+    Validators.required,
+    Validators.minLength(5)
+  ]);
   id = this.route.paramMap.pipe(map((paramsMap) => paramsMap.get('id')))
   users$ =this.id.pipe(
     filter(id=>!!id),
@@ -26,7 +36,8 @@ export class ShowUserComponent implements OnInit {
   constructor(
     private route :ActivatedRoute,
     private http:HttpClient,
-    private userService: UsersListService
+    private userService: UsersListService,
+
   ) { }
 
   ngOnInit(): void {

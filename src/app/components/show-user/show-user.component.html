@@ -3,4 +3,26 @@
   <div class="name">{{users.first_name}}     {{users.last_name}} </div>
   <div class="profile-title"> Works hard as software engineer </div>
   <a href="#">{{users.email}}</a>
+  <br/>
+  <br/>
+  <mat-form-field color="accent" >
+    <input
+      matInput
+      type="email"
+      [formControl]="email"
+      placeholder="{{users.email}}"
+      required
+    />
+  </mat-form-field>
+
+  <mat-form-field color="accent">
+    <input
+      matInput
+      type="password"
+      [formControl]="password"
+      placeholder="{{'New password'}}"
+      required
+    />
+  </mat-form-field>
+  <button mat-raised-button color="primary"   [routerLink]="['../../../',1]">backup</button>
 </div>

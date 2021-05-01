@@ -2,15 +2,19 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-card class="box">
       <mat-card-header>
-        <mat-card-title>Sign In</mat-card-title>
+        <mat-card-title>Sign up</mat-card-title>
       </mat-card-header>
 
-      <td><mat-form-field class="example-full-width">
-        <mat-label>user name</mat-label>
-        <input matInput>
-      </mat-form-field></td>
-
-
+      <table class="nameUser" cellspacing="0"><tr>
+        <td><mat-form-field class="example-full-width">
+          <mat-label >First name</mat-label>
+          <input matInput formControlName="firstName">
+        </mat-form-field></td>
+        <td><mat-form-field class="example-full-width">
+          <mat-label>Long Last Name That Will Be Truncated</mat-label>
+          <input matInput  formControlName="lastName">
+        </mat-form-field></td>
+      </tr></table>
       <mat-form-field class="example-full-width">
         <mat-label>Email</mat-label>
         <input type="email" formControlName="email" matInput placeholder="Ex. pat@example.com" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
@@ -26,12 +30,10 @@
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
       </mat-form-field>
-      <button  mat-raised-button color="primary"  [disabled]="loading" (ngSubmit)="onSubmit()">
-        <span *ngIf="loading" ></span>
-        Login
-    </button>
       <br/>
-      <button mat-raised-button color="" (click)="updateName()"  [routerLink]="['signup']">sign up</button>
+      <button mat-raised-button color="primary"   (click)="onSubmit()">save</button>
+      <br/>
+      <button mat-raised-button color=""   [routerLink]="['../']">backup</button>
     </mat-card>
   </form>
 </div>

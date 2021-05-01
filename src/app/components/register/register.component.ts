@@ -1,6 +1,6 @@
 import { UsersListService } from './../../users-list.service';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { filter, switchMap , map } from 'rxjs/operators';
+import { filter, switchMap , map, first } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-register',
@@ -20,10 +20,25 @@ export class RegisterComponent  {
     private route:ActivatedRoute
   ) { }
   onPrevious(){}
-  onNext(){}
+  onNext(){
+   this.route.paramMap.pipe(switchMap(
+    (paramsMap) => paramsMap.keys.find
+   ))
+  }
+  hasNext(){
+
+  }
+  deleteUser(id: number) {
+
+    this.userService.delete(id)
+    this.userService.openSnackBar(`The user in the id :${id} is deleted from the server`,"Done")
+    console.log(id)
+
+  }
   displayedColumns: string[] = ['avatar', 'first-name', 'last-name', 'email'];
 }
 interface user {
+  "page":string;
   "id":string;
   "avatar": string;
   "first_name": string;

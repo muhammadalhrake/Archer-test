@@ -1,0 +1,15 @@
+.main-wrapper{
+  display: block;
+  margin: 100px auto;
+}
+.box{
+    display:flex;
+    flex-direction: column;
+    padding: 175px;
+}
+.nameUser{
+    display:flex;
+}
+td{
+  padding-right: 8px;
+}

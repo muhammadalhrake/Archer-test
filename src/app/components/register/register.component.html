@@ -4,7 +4,7 @@
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Position Column -->
+    <!-- Avatar Column -->
     <ng-container matColumnDef="avatar">
       <th mat-header-cell *matHeaderCellDef> Avatar </th>
       <td mat-cell > <img [src]="user.avatar" alt="" class="avatar"> </td>
@@ -13,28 +13,29 @@
     <!-- Name Column -->
     <ng-container matColumnDef="first-name">
       <th mat-header-cell *matHeaderCellDef>First Name </th>
-      <td mat-cell > {{user.first_name}} </td>
+      <td mat-cell > {{user.first_name}} {{user.last_name}}</td>
     </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="last-name">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
-      <td mat-cell > {{user.last_name}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
+    <!-- email Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef> Email </th>
       <td mat-cell > {{user.email}} </td>
     </ng-container>
-
+    <ng-container>
+      <button (click)="deleteUser(user.id)" >
+        <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
+        <span >Delete</span>
+    </button>
+    </ng-container>
     <!-- Show button -->
     <ng-container matColumnD  ef="symbol">
       <th mat-header-cell *matHeaderCellDef> Show </th>
-      <button  [routerLink]="['show/'+user.id]">Show User Detail </button>
+      <a><mat-icon [routerLink]="['show/'+user.id]">account_box</mat-icon></a>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <br/>
+  <button mat-raised-button color="primary"   [routerLink]="['../../']">backup</button>
 </div>

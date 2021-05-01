@@ -11,13 +11,15 @@ import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ShowUserComponent } from './components/show-user/show-user.component';
+import { SignupComponent } from './components/signup/signup.component';
 //import{MatTableModule} from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
     RegisterComponent,
-    ShowUserComponent
+    ShowUserComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

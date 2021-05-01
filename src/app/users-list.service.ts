@@ -1,5 +1,6 @@
 import { HttpClient , HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
 @Injectable({
@@ -9,7 +10,8 @@ import { map } from 'rxjs/operators';
 export class UsersListService {
   reqres = 'https://reqres.in/api'
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    public _snackBar: MatSnackBar
 
   ) { }
 
@@ -19,14 +21,25 @@ export class UsersListService {
   }
   getUserPerPage(page: string) {
     const params = (new HttpParams()).set('page', page)
-    return this.http.get<any>(`${this.reqres}/users`, { params }).pipe(
+    return this.http.get<any>(`${this.reqres}/users?page=`+page, { params }).pipe(
       map(({ data }) => data as reqresUser[])
     )
   }
-  getUserPerPageById(id: string) {
+  getUserPerPageById(id: any) {
     return this.http.get<any>(
       `${this.reqres}/users/${id}`
     )
+  }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
+  delete(id: number) {
+    return this.http.delete(`${this.reqres}/users/${id}`)
+        .pipe(map(x => {
+            // auto logout if the logged in user deleted their own record
+            this.openSnackBar(`The user in the id :${id} is deleted`,"Done")
+            return x;
+    }));
   }
 }
 interface reqresUser {
